@@ -1,3 +1,5 @@
+#pragma once
+
 #include <string>
 #include <list>
 #include <map>
@@ -17,24 +19,14 @@ enum Commands
     DIV
 };
 
-std::map<std::string, Commands> commands = {
-    {"ADD", Commands::ADD},
-    {"DUP", Commands::DUP},
-    {"SWAP", Commands::SWAP},
-    {"OVER", Commands::OVER},
-    {"MUL", Commands::MUL},
-    {"COS", Commands::COS},
-    {"SIN", Commands::SIN},
-    {"SQRT", Commands::SQRT},
-    {"SUB", Commands::SUB},
-    {"DIV", Commands::DIV}};
-
 class Stack
 {
-    std::list<Commands> cms;
+    std::list<Commands> stackCommands;
 
 public:
     Stack();
-    void Command(Commands com);
+    bool IsCommand(std::string command);
+    std::string GetListOfCommands();
+    void Command(std::string command);
     float Execute(float x);
 };

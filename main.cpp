@@ -18,15 +18,7 @@ int main()
 
 #pragma region request
 
-        std::cout << "Enter instructions(";
-        std::cout << commands.begin()->first;
-
-        for (auto label = ++commands.begin(); label != commands.end(); label++)
-        {
-            std::cout << "," << label->first;
-        }
-
-        std::cout << "):" << std::endl;
+        std::cout << "Enter instructions(" << main.GetListOfCommands() << "):" << std::endl;
 
         while (true)
         {
@@ -36,9 +28,9 @@ int main()
             {
                 break;
             }
-            else if (commands.find(inst) != commands.end())
+            else if (main.IsCommand(inst))
             {
-                main.Command(commands[inst]);
+                main.Command(inst);
             }
             else
                 std::cout << "Invalid instruction!" << std::endl;

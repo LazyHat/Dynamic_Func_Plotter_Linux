@@ -1,10 +1,43 @@
 #include "Stack.h"
+#include <exception>
+
+std::map<std::string, Commands> commandsMap = {
+    {"ADD", Commands::ADD},
+    {"DUP", Commands::DUP},
+    {"SWAP", Commands::SWAP},
+    {"OVER", Commands::OVER},
+    {"MUL", Commands::MUL},
+    {"COS", Commands::COS},
+    {"SIN", Commands::SIN},
+    {"SQRT", Commands::SQRT},
+    {"SUB", Commands::SUB},
+    {"DIV", Commands::DIV}};
 
 Stack::Stack() {}
 
-void Stack::Command(Commands com)
+void Stack::Command(std::string command)
 {
-    cms.push_back(com);
+    if (!IsCommand(command))
+        throw std::exception();
+    stackCommands.push_back(commandsMap[command]);
+}
+
+bool Stack::IsCommand(std::string command)
+{
+    return commandsMap.find(command) != commandsMap.end();
+}
+
+std::string Stack::GetListOfCommands()
+{
+    std::string result;
+
+    result += commandsMap.begin()->first;
+
+    for (auto label = ++commandsMap.begin(); label != commandsMap.end(); label++)
+    {
+        result += "," + label->first;
+    }
+    return result;
 }
 
 float Stack::Execute(float x)
@@ -13,7 +46,7 @@ float Stack::Execute(float x)
 
     st.push_back(x);
 
-    for (auto &&i : cms)
+    for (auto &&i : stackCommands)
     {
         switch (i)
         {
