@@ -18,7 +18,7 @@ int main()
 
 #pragma region request
 
-        std::cout << "Enter instructions(" << main.GetListOfCommands() << "):" << std::endl;
+        std::cout << "Enter instructions(" << main.GetListOfCommands() << ")(Enter END for a end):" << std::endl;
 
         while (true)
         {
