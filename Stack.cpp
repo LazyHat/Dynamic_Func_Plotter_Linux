@@ -9,6 +9,12 @@ std::map<std::string, Commands> commandsMap = {
     {"MUL", Commands::MUL},
     {"COS", Commands::COS},
     {"SIN", Commands::SIN},
+    {"TAN", Commands::TAN},
+    {"CTAN", Commands::CTAN},
+    {"ASIN", Commands::ASIN},
+    {"ACOS", Commands::ACOS},
+    {"ATAN", Commands::ATAN},
+    {"ACTAN", Commands::ACTAN},
     {"SQRT", Commands::SQRT},
     {"SUB", Commands::SUB},
     {"DIV", Commands::DIV}};
@@ -91,6 +97,30 @@ float Stack::Execute(float x)
 
         case Commands::SIN:
             *(--st.end()) = sin(*(--st.end()));
+            break;
+
+        case Commands::TAN:
+            *(--st.end()) = tan(*(--st.end()));
+            break;
+
+        case Commands::CTAN:
+            *(--st.end()) = 1 / tan(*(--st.end()));
+            break;
+
+        case Commands::ASIN:
+            *(--st.end()) = asin(*(--st.end()));
+            break;
+
+        case Commands::ACOS:
+            *(--st.end()) = acos(*(--st.end()));
+            break;
+
+        case Commands::ATAN:
+            *(--st.end()) = atan(*(--st.end()));
+            break;
+
+        case Commands::ACTAN:
+            *(--st.end()) = atan(*(--st.end())) - M_PI / 2;
             break;
 
         case Commands::SQRT:

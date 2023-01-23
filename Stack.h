@@ -14,6 +14,12 @@ enum Commands
     OVER,
     COS,
     SIN,
+    TAN,
+    CTAN,
+    ACOS,
+    ASIN,
+    ATAN,
+    ACTAN,
     SQRT,
     SUB,
     DIV
