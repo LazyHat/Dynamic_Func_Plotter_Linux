@@ -10,6 +10,7 @@
         "${file}",
         "-o",
         "${fileDirname}/${fileBasenameNoExtension}",
+        "Stack.cpp",
         "-ISFML-2.5.1/include",
         "-LSFML-2.5.1/lib",
         "-lsfml-graphics",
