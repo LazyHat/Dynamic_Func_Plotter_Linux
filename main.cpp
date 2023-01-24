@@ -24,6 +24,7 @@ int main()
         {
             std::string inst;
             std::cin >> inst;
+            std::transform(inst.begin(), inst.end(), inst.begin(), ::toupper);
             if (inst == "END")
             {
                 break;
