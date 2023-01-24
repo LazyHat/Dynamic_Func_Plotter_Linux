@@ -28,6 +28,11 @@ int main()
             {
                 break;
             }
+            else if (inst == "EXIT")
+            {
+                system("clear");
+                exit(0);
+            }
             else if (main.IsCommand(inst))
             {
                 main.Command(inst);
