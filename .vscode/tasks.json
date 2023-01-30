@@ -11,6 +11,7 @@
         "-o",
         "${fileDirname}/Plotter",
         "Stack.cpp",
+        "Program.cpp",
         "-ISFML-2.5.1/include",
         "-LSFML-2.5.1/lib",
         "-lsfml-graphics",
