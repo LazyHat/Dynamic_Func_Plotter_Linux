@@ -8,6 +8,11 @@ Program::Program()
     win = new RenderWindow(VideoMode(800, 500), "Plotter");
     stack = new Stack();
 }
+Program::~Program()
+{
+    delete win;
+    delete stack;
+}
 void Program::update()
 {
 }

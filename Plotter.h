@@ -3,12 +3,14 @@
 
 class Plotter : BaseWindow
 {
+    const Stack *stack = nullptr;
     void init();
     void update();
     void draw();
-    void EventHandler(sf::Event e);
+    void EventHandler(const sf::Event e);
 
 public:
-    Plotter();
+    Plotter(const Stack *_stack);
+    ~Plotter();
     void begin();
 };

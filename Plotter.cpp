@@ -2,14 +2,22 @@
 
 using namespace sf;
 using namespace std;
-Plotter::Plotter()
+Plotter::Plotter(const Stack *_stack)
 {
     win = new RenderWindow(VideoMode(800, 500), "Plotter");
+    stack = _stack;
+}
+Plotter::~Plotter()
+{
+    delete win;
+    win = nullptr;
+    delete stack;
+    stack = nullptr;
 }
 void Plotter::update()
 {
 }
-void Plotter::EventHandler(Event e)
+void Plotter::EventHandler(const Event e)
 {
     switch (e.type)
     {

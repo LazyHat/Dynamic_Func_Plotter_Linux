@@ -3,6 +3,7 @@
 
 class Program : BaseWindow
 {
+    Stack *stack = nullptr;
     void init();
     void update();
     void draw();
@@ -10,5 +11,6 @@ class Program : BaseWindow
 
 public:
     Program();
+    ~Program();
     void begin();
 };

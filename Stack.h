@@ -31,8 +31,8 @@ class Stack
 
 public:
     Stack();
-    bool IsCommand(std::string command);
-    std::string GetListOfCommands();
+    bool IsCommand(std::string command) const;
+    std::string GetListOfCommands() const;
     void Command(std::string command);
-    float Execute(float x);
+    float Execute(float x) const;
 };

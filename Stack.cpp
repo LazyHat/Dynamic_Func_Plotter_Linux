@@ -28,12 +28,12 @@ void Stack::Command(std::string command)
     stackCommands.push_back(commandsMap[command]);
 }
 
-bool Stack::IsCommand(std::string command)
+bool Stack::IsCommand(std::string command) const
 {
     return commandsMap.find(command) != commandsMap.end();
 }
 
-std::string Stack::GetListOfCommands()
+std::string Stack::GetListOfCommands() const
 {
     std::string result;
 
@@ -46,7 +46,7 @@ std::string Stack::GetListOfCommands()
     return result;
 }
 
-float Stack::Execute(float x)
+float Stack::Execute(float x) const
 {
     std::list<float> st;
 
