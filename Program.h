@@ -1,16 +1,21 @@
 #pragma once
-#include "BaseWindow.h"
+#include <vector>
+#include <SFML/Graphics.hpp>
+#include "Stack.h"
+#include "Button.h"
 
-class Program : BaseWindow
+class Program
 {
-    Stack *stack = nullptr;
+    sf::Font _font;
+    sf::RenderWindow win;
+    std::vector<sf::Button *> buttons;
+    Stack stack;
     void init();
-    void update();
+    void update(sf::Event &e);
     void draw();
-    void EventHandler(sf::Event e);
+    void EventHandler(sf::Event &e);
 
 public:
     Program();
-    ~Program();
     void begin();
 };
