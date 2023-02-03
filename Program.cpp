@@ -26,11 +26,11 @@ void Program::EventHandler(Event &e)
 void Program::init()
 {
     win.setFramerateLimit(1 / 120);
-    buttons.push_back(new Button(Vector2f(20, 20), Vector2f(50, 50), _font));
+    buttons.push_back(new Button(Vector2f(20, 20), Vector2f(50, 20), _font));
 }
 void Program::draw()
 {
-    win.clear();
+    win.clear(Color(180, 180, 180));
     for (auto b : buttons)
     {
         win.draw(*b);

@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <map>
+#include <array>
 
 namespace sf
 {
@@ -21,10 +22,10 @@ namespace sf
         Text _label;
         State _state = Released;
 
-        std::map<State, Color[3]> colors = {{Normal, Color[3]{Color::Black, Color::Blue, Color::Magenta}}};
-        Color _pressed[2]{Color::Magenta, Color::Yellow};
-        Color _normal[2]{Color::Black, Color::White};
-        Color _hovered[2]{Color::Cyan, Color::Blue};
+        std::map<State, std::array<Color, 3>> _colors =
+            {{Normal, {{Color(150, 150, 150), Color::Black, Color::White}}},
+             {Hovered, {{Color(120, 120, 200), Color::Black, Color::White}}},
+             {Pressed, {{Color(100, 100, 100), Color::Black, Color::White}}}};
 
         virtual void draw(sf::RenderTarget &target, RenderStates states) const;
 
