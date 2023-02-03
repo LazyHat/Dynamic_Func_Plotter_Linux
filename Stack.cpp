@@ -51,9 +51,56 @@ std::map<std::string, Commands> Stack::GetMapOfCommands() const
     return commandsMap;
 }
 
-size_t Stack::GetCountOfCommands() const
+int Stack::GetCountOfUnaryCommands() const
 {
-    return commandsMap.size();
+    int result = 0;
+    for (auto cmd : commandsMap)
+    {
+        if (cmd.second >= 10 && cmd.second < 20)
+            result++;
+    }
+    return result;
+}
+int Stack::GetCountOfBinaryCommands() const
+{
+    int result = 0;
+    for (auto cmd : commandsMap)
+    {
+        if (cmd.second >= 20)
+            result++;
+    }
+    return result;
+}
+int Stack::GetCountOfStackCommands() const
+{
+    int result = 0;
+    for (auto cmd : commandsMap)
+    {
+        if (cmd.second < 10)
+            result++;
+    }
+    return result;
+}
+
+Commands Stack::GetUnaryCommand(int index) const
+{
+    return static_cast<Commands>(index + 10);
+}
+Commands Stack::GetBinaryCommand(int index) const
+{
+    return static_cast<Commands>(index + 20);
+}
+Commands Stack::GetStackCommand(int index) const
+{
+    return static_cast<Commands>(index);
+}
+
+std::string
+Stack::GetCommandStr(Commands command) const
+{
+    for (auto i : commandsMap)
+        if (i.second == command)
+            return i.first;
 }
 
 float Stack::Execute(float x) const
@@ -67,7 +114,7 @@ float Stack::Execute(float x) const
         switch (i)
         {
 
-        case Commands::ADD:
+        case Commands::SUM:
             if (st.size() > 1)
             {
                 *(--st.end()) += *(-- --st.end());

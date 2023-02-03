@@ -35,7 +35,13 @@ public:
     bool IsCommand(std::string command) const;
     std::string GetStrCommands() const;
     std::map<std::string, Commands> GetMapOfCommands() const;
-    size_t GetCountOfCommands() const;
+    int GetCountOfUnaryCommands() const;
+    int GetCountOfBinaryCommands() const;
+    int GetCountOfStackCommands() const;
+    std::string GetCommandStr(Commands command) const;
+    Commands GetUnaryCommand(int index) const;
+    Commands GetBinaryCommand(int index) const;
+    Commands GetStackCommand(int index) const;
     void Command(std::string command);
     float Execute(float x) const;
 };
