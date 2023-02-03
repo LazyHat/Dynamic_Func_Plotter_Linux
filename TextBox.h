@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include "Button.h"
+#include <list>
 
 namespace sf
 {
@@ -13,5 +14,8 @@ namespace sf
         TextBox(Vector2f pos, Vector2f size, Font &font);
         TextBox();
         void SetFont(Font &font);
+        void SetPosition(Vector2f pos);
+        void SetSize(Vector2f size);
+        void Display(std::list<std::string> src);
     };
 }

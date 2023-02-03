@@ -34,6 +34,7 @@ public:
     Stack();
     bool IsCommand(std::string command) const;
     std::string GetStrCommands() const;
+    std::list<std::string> GetStackListStr() const;
     std::map<std::string, Commands> GetMapOfCommands() const;
     int GetCountOfUnaryCommands() const;
     int GetCountOfBinaryCommands() const;

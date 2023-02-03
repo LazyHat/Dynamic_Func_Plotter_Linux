@@ -6,9 +6,40 @@ Program::Program()
 {
     _win.create(VideoMode(800, 500), "Plotter");
     _font.loadFromFile("Ubuntu-L.ttf");
+    _stackBox.SetFont(_font);
+}
+Program::~Program()
+{
+    for (auto i : _signs)
+        delete i;
+    for (auto i : _buttons)
+        delete i.second;
+    for (auto i : _plotters)
+        delete i;
 }
 void Program::update(Event &e)
 {
+    for (auto b : _buttons)
+    {
+        if (b.second->GetState() == Button::Pressed)
+        {
+            if (b.first == "PLOT")
+            {
+                _plotters.push_back(new Plotter(_stack));
+            }
+            else
+                _stack.Command(b.first);
+            b.second->CallBack();
+        }
+    }
+    for (auto p = _plotters.begin(); p != _plotters.end(); p++)
+    {
+        if ((*p)->IsClosed())
+        {
+            _plotters.erase(p);
+            p = _plotters.begin();
+        }
+    }
 }
 void Program::EventHandler(Event &e)
 {
@@ -26,7 +57,7 @@ void Program::EventHandler(Event &e)
 void Program::init()
 {
     _win.setFramerateLimit(1 / 120);
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < 5; i++)
         _signs.push_back(new Text("", _font, 20));
     _signs[0]->setPosition(20, 255);
     _signs[0]->setString("Unary Commands:");
@@ -50,16 +81,24 @@ void Program::init()
         std::string cmd = _stack.GetCommandStr(_stack.GetStackCommand(w));
         _buttons[cmd] = new Button(Vector2f(350 + w * 70, 445), Vector2f(60, 30), _font, cmd);
     }
-    _signs[3]->setPosition(600, 20);
+    _signs[3]->setPosition(550, 20);
     _signs[3]->setString("Stack");
+    _stackBox.SetPosition(Vector2f(550, 65));
+    _stackBox.SetSize(Vector2f(200, 300));
+    _signs[4]->setPosition(520, 65);
+    _signs[4]->setString("y = ");
+
+    _buttons["PLOT"] = new Button(Vector2f(720, 460), Vector2f(70, 30), _font, "PLOT");
 }
 void Program::draw()
 {
+    _stackBox.Display(_stack.GetStackListStr());
     _win.clear(Color(180, 180, 180));
     for (auto l : _signs)
         _win.draw(*l);
     for (auto b : _buttons)
         _win.draw(*(b.second));
+    _win.draw(_stackBox);
     _win.display();
 }
 void Program::begin()

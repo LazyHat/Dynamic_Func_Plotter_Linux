@@ -36,5 +36,6 @@ namespace sf
         void Update(Event &e, RenderWindow &window);
         void SetFont(Font &font);
         State GetState();
+        void CallBack();
     };
 }

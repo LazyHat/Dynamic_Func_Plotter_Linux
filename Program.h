@@ -5,11 +5,13 @@
 #include "Stack.h"
 #include "Button.h"
 #include "TextBox.h"
+#include "Plotter.h"
 
 class Program
 {
     sf::Font _font;
     sf::RenderWindow _win;
+    std::vector<Plotter *> _plotters;
     std::vector<sf::Text *> _signs;
     std::map<std::string, sf::Button *> _buttons;
     sf::TextBox _stackBox;
@@ -21,5 +23,6 @@ class Program
 
 public:
     Program();
+    ~Program();
     void begin();
 };

@@ -1,16 +1,19 @@
 #pragma once
-#include "BaseWindow.h"
+#include <SFML/Graphics.hpp>
+#include "Stack.h"
 
-class Plotter : BaseWindow
+class Plotter
 {
-    const Stack *stack = nullptr;
+    sf::RenderWindow _win;
+    Stack _stack;
     void init();
     void update();
     void draw();
     void EventHandler(const sf::Event e);
 
 public:
-    Plotter(const Stack *_stack);
+    Plotter(const Stack _stack);
     ~Plotter();
     void begin();
+    bool IsClosed() const;
 };

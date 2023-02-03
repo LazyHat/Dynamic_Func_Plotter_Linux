@@ -30,28 +30,21 @@ void sf::Button::Update(sf::Event &e, sf::RenderWindow &window)
                        mousePos.x <= _border.getPosition().x + _border.getSize().x &&
                        mousePos.y >= _border.getPosition().y &&
                        mousePos.y <= _border.getPosition().y + _border.getSize().y);
-
-    if (e.type == Event::MouseMoved)
-    {
-        if (mouseState)
-            _state = Hovered;
-        else
-            _state = Normal;
-    }
-    else if (e.type == Event::MouseButtonPressed)
-    {
-        if (mouseState && e.mouseButton.button == Mouse::Left)
-            _state = Pressed;
-        else
-            _state = Normal;
-    }
-    else if (e.type == Event::MouseButtonReleased)
-    {
-        if (mouseState && e.mouseButton.button == Mouse::Left)
-            _state = Hovered;
-        else
-            _state = Normal;
-    }
+    if (_state != Pressed)
+        if (e.type == Event::MouseMoved)
+        {
+            if (mouseState)
+                _state = Hovered;
+            else
+                _state = Normal;
+        }
+        else if (e.type == Event::MouseButtonPressed)
+        {
+            if (mouseState && e.mouseButton.button == Mouse::Left)
+                _state = Pressed;
+            else
+                _state = Normal;
+        }
     _border.setFillColor(_colors[_state][0]);
     _border.setOutlineColor(_colors[_state][1]);
     _label.setFillColor(_colors[_state][2]);
@@ -65,4 +58,10 @@ void sf::Button::SetFont(sf::Font &font)
 sf::Button::State sf::Button::GetState()
 {
     return _state;
+}
+
+void sf::Button::CallBack()
+{
+    if (_state == Pressed)
+        _state = Hovered;
 }

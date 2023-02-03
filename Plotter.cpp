@@ -2,45 +2,48 @@
 
 using namespace sf;
 using namespace std;
-Plotter::Plotter(const Stack *_stack)
+
+Plotter::Plotter(const Stack stack)
 {
-    win = new RenderWindow(VideoMode(800, 500), "Plotter");
-    stack = _stack;
+    _win.create(VideoMode(800, 500), "Plotter");
+    _stack = stack;
 }
+
 Plotter::~Plotter()
 {
-    delete win;
-    win = nullptr;
-    delete stack;
-    stack = nullptr;
 }
+
 void Plotter::update()
 {
 }
+
 void Plotter::EventHandler(const Event e)
 {
     switch (e.type)
     {
     case Event::Closed:
-        win->close();
+        _win.close();
         break;
     }
 }
+
 void Plotter::init()
 {
 }
+
 void Plotter::draw()
 {
-    win->clear();
-    win->display();
+    _win.clear();
+    _win.display();
 }
+
 void Plotter::begin()
 {
     init();
-    while (win->isOpen())
+    while (_win.isOpen())
     {
         Event e;
-        while (win->pollEvent(e))
+        while (_win.pollEvent(e))
         {
             EventHandler(e);
         }
@@ -48,3 +51,5 @@ void Plotter::begin()
         draw();
     }
 }
+
+bool Plotter::IsClosed() const { return !_win.isOpen(); }

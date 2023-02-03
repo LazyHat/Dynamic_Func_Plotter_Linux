@@ -1,5 +1,7 @@
 #include "Stack.h"
 #include <exception>
+#include <algorithm>
+#include <cctype>
 
 std::map<std::string, Commands> commandsMap = {
     {"DUP", Commands::DUP},
@@ -42,6 +44,92 @@ std::string Stack::GetStrCommands() const
     for (auto label = ++commandsMap.begin(); label != commandsMap.end(); label++)
     {
         result += "," + label->first;
+    }
+    return result;
+}
+
+std::list<std::string> Stack::GetStackListStr() const
+{
+    std::vector<std::string> res;
+    std::string x = "x";
+    res.push_back(x);
+    for (auto cmd : stackCommands)
+    {
+        switch (cmd)
+        {
+        case DUP:
+            res.insert(res.begin() + 1, res[0]);
+            break;
+
+        case SWAP:
+        {
+            if (res.size() > 1)
+            {
+                std::string var = res[0];
+                res[0] = res[1];
+                res[1] = var;
+            }
+        }
+        break;
+
+        case OVER:
+            if (res.size() > 2)
+                res.insert(res.begin(), res[1]);
+            break;
+
+        case SUM:
+            if (res.size() > 1)
+                if (res[0] == res[1])
+                    res[0] = "2*" + res[0];
+                else
+                    res[0] = res[0] + "+(" + res[1] + ")";
+            res.erase(res.begin() + 1);
+            break;
+
+        case SUB:
+            if (res.size() > 1)
+                if (res[0] == res[1])
+                    res[0] = "0";
+                else
+                    res[0] = res[0] + "-(" + res[1] + ")";
+            res.erase(res.begin() + 1);
+            break;
+
+        case MUL:
+            if (res.size() > 1)
+                if (res[0] == res[1])
+                    res[0] = "(" + res[0] + ")^2";
+                else
+                    res[0] = res[0] + "*(" + res[1] + ")";
+            res.erase(res.begin() + 1);
+            break;
+
+        case DIV:
+            if (res.size() > 1)
+                if (res[0] == res[1])
+                    res[0] = "1";
+                else
+                    res[0] = res[0] + "/(" + res[1] + ")";
+            res.erase(res.begin() + 1);
+            break;
+
+        default:
+            if (cmd >= 10 && cmd <= 20)
+            {
+                std::string scmd = GetCommandStr(cmd);
+                for (auto &&c : scmd)
+                    if (c <= 'Z' && c >= 'A')
+                        c = c - 'A' + 'a';
+                res[0] = scmd + "(" + res[0] + ")";
+            }
+            else
+                throw std::exception();
+        }
+    }
+    std::list<std::string> result;
+    for (auto s : res)
+    {
+        result.push_back(s);
     }
     return result;
 }
@@ -101,6 +189,7 @@ Stack::GetCommandStr(Commands command) const
     for (auto i : commandsMap)
         if (i.second == command)
             return i.first;
+    throw std::exception();
 }
 
 float Stack::Execute(float x) const
@@ -199,6 +288,8 @@ float Stack::Execute(float x) const
                 st.erase(-- --st.end());
             }
             break;
+        default:
+            throw std::exception();
         }
     }
     return *(--st.end());
