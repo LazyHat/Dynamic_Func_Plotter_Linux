@@ -2,7 +2,7 @@
 
 sf::Button::Button() {}
 
-sf::Button::Button(sf::Vector2f pos, sf::Vector2f size, sf::Font &font)
+sf::Button::Button(sf::Vector2f pos, sf::Vector2f size, sf::Font &font, std::string label)
 {
     _border.setPosition(pos);
     _border.setSize(size);
@@ -10,8 +10,8 @@ sf::Button::Button(sf::Vector2f pos, sf::Vector2f size, sf::Font &font)
     _border.setOutlineThickness(-1.4);
     _border.setOutlineColor(_colors[Normal][1]);
     _label.setFont(font);
-    _label.setCharacterSize(14);
-    _label.setString("But1");
+    _label.setCharacterSize(size.y * 0.6);
+    _label.setString(label);
     _label.setOrigin(_label.getGlobalBounds().width / 2, _label.getGlobalBounds().height / 2);
     _label.setPosition(pos.x + size.x / 2, pos.y + size.y / 2);
     _label.setFillColor(_colors[Normal][2]);

@@ -1,18 +1,17 @@
 #pragma once
 
 #include <string>
+#include <vector>
 #include <list>
 #include <map>
 #include <cmath>
 
 enum Commands
 {
-    ADD,
-    MUL,
-    DUP,
+    DUP = 0,
     SWAP,
     OVER,
-    COS,
+    COS = 10,
     SIN,
     TAN,
     CTAN,
@@ -21,7 +20,9 @@ enum Commands
     ATAN,
     ACTAN,
     SQRT,
+    SUM = 20,
     SUB,
+    MUL,
     DIV
 };
 
@@ -32,7 +33,9 @@ class Stack
 public:
     Stack();
     bool IsCommand(std::string command) const;
-    std::string GetListOfCommands() const;
+    std::string GetStrCommands() const;
+    std::map<std::string, Commands> GetMapOfCommands() const;
+    size_t GetCountOfCommands() const;
     void Command(std::string command);
     float Execute(float x) const;
 };

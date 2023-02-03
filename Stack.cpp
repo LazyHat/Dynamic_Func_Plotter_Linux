@@ -2,11 +2,9 @@
 #include <exception>
 
 std::map<std::string, Commands> commandsMap = {
-    {"ADD", Commands::ADD},
     {"DUP", Commands::DUP},
     {"SWAP", Commands::SWAP},
     {"OVER", Commands::OVER},
-    {"MUL", Commands::MUL},
     {"COS", Commands::COS},
     {"SIN", Commands::SIN},
     {"TAN", Commands::TAN},
@@ -16,7 +14,9 @@ std::map<std::string, Commands> commandsMap = {
     {"ATAN", Commands::ATAN},
     {"ACTAN", Commands::ACTAN},
     {"SQRT", Commands::SQRT},
+    {"SUM", Commands::SUM},
     {"SUB", Commands::SUB},
+    {"MUL", Commands::MUL},
     {"DIV", Commands::DIV}};
 
 Stack::Stack() {}
@@ -33,7 +33,7 @@ bool Stack::IsCommand(std::string command) const
     return commandsMap.find(command) != commandsMap.end();
 }
 
-std::string Stack::GetListOfCommands() const
+std::string Stack::GetStrCommands() const
 {
     std::string result;
 
@@ -44,6 +44,16 @@ std::string Stack::GetListOfCommands() const
         result += "," + label->first;
     }
     return result;
+}
+
+std::map<std::string, Commands> Stack::GetMapOfCommands() const
+{
+    return commandsMap;
+}
+
+size_t Stack::GetCountOfCommands() const
+{
+    return commandsMap.size();
 }
 
 float Stack::Execute(float x) const

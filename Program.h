@@ -7,9 +7,9 @@
 class Program
 {
     sf::Font _font;
-    sf::RenderWindow win;
-    std::vector<sf::Button *> buttons;
-    Stack stack;
+    sf::RenderWindow _win;
+    std::vector<sf::Button *> _buttons;
+    Stack _stack;
     void init();
     void update(sf::Event &e);
     void draw();

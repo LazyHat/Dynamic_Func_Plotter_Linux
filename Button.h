@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <string>
 #include <map>
 #include <array>
 
@@ -31,7 +32,7 @@ namespace sf
 
     public:
         Button();
-        Button(Vector2f pos, Vector2f size, Font &font);
+        Button(Vector2f pos, Vector2f size, Font &font, std::string label = "But");
         void Update(Event &e, RenderWindow &window);
         void SetFont(Font &font);
         State GetState();
